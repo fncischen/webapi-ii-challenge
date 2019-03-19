@@ -1,3 +1,3 @@
 const express = require('express');
 const server = express();
-const data = require("./seeds/posts");
+const data = require("./data/seeds/posts");
