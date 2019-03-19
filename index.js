@@ -5,7 +5,7 @@ const router = express.Router();
 const data = require("./data/db.js");
 
 router.get( "/api/posts", (req, res) => {
-    console.log(data.find())
+    console.log(data.find());
     if(!data.find()){
         res.status(500).json({ error: "There was an error while saving the post to the database" })
     }
@@ -15,7 +15,7 @@ router.get( "/api/posts", (req, res) => {
 });
 
 router.get( "/api/posts:id", (req, res) => {
-    if(!data.find(req.params.id)){
+    if(!data.findById(req.params.id)){
         res.status(404).json({ error: "The post information could not be retrieved."})
     }
     else {
@@ -41,7 +41,7 @@ router.post( "/api/posts", (req, res) => {
 });
 
 router.delete( "/api/posts:id", (req, res) => {
-    if(!data.find(req.params.id)){
+    if(!data.findById(req.params.id)){
         res.status(404).json({ error: "The post with the specified ID does not exist." })
     }
     else {
@@ -59,7 +59,7 @@ router.delete( "/api/posts:id", (req, res) => {
 });
 
 router.put( "/api/posts:id", (req, res) => {
-    if(!data.find(req.params.id)){
+    if(!data.findById(req.params.id)){
         res.status(404).json({ error: "The post with the specified ID does not exist." })
     }
     else {
@@ -79,7 +79,10 @@ router.put( "/api/posts:id", (req, res) => {
     }
 });
 
-server.use('/', (req, res) => res.send('API up and running!'));
+// server.use('/', (req, res) => res.send('API up and running!'));
+// server.use('/api/posts', (req, res) => res.json(req.body));
+// server.use('/api/posts/:id', (req, res) => res.json(req.body));
+
 server.listen(5000, () =>
   console.log('Server running on http://localhost:5000')
 );
