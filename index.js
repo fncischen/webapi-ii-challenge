@@ -2,9 +2,10 @@ const express = require('express');
 const server = express();
 const router = express.Router(); 
 
-const data = require("./data/seeds/posts");
+const data = require("./data/db.js");
 
 router.get( "/api/posts", (req, res) => {
+    console.log(data.find())
     if(!data.find()){
         res.status(500).json({ error: "There was an error while saving the post to the database" })
     }
@@ -77,3 +78,8 @@ router.put( "/api/posts:id", (req, res) => {
        }
     }
 });
+
+server.use('/', (req, res) => res.send('API up and running!'));
+server.listen(5000, () =>
+  console.log('Server running on http://localhost:5000')
+);
